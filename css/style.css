@@ -1,114 +1,413 @@
-/* 乳腺癌复发预测模型 - 样式文件 */
+:root {
+    --bg-color: #F3F5F9;
+    --card-bg: #FFFFFF;
+    --primary: #2563EB; /* 皇家蓝 */
+    --primary-dark: #1E40AF;
+    --primary-light: #EFF6FF;
+    --text-main: #1E293B;
+    --text-sub: #64748B;
+    --border-color: #E2E8F0;
+    --input-bg: #F8FAFC;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    background-attachment: fixed !important;
-    min-height: 100vh !important;
-    padding: 20px 0 !important;
-    margin: 0 !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
 }
 
-.container {
-    background: white !important;
-    border-radius: 15px !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
-    padding: 30px !important;
-    max-width: 900px !important;
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-header h2 {
-    color: #333;
+/* 头部品牌区 */
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0.5rem;
+}
+
+.logo-badge {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: var(--shadow-md);
+}
+
+.brand-header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.brand-header p {
+    font-size: 0.875rem;
+    color: var(--text-sub);
+}
+
+/* 主卡片 */
+.main-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section.full-width {
+    grid-column: span 2;
+    background: var(--primary-light);
+    margin: 0 -2.5rem -1rem -2.5rem; /* 负边距拉伸背景 */
+    padding: 2rem 2.5rem;
+    border-radius: 0 0 24px 24px;
+    border-top: 1px dashed #BFDBFE;
+}
+
+.section-title {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-sub);
     font-weight: 600;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
 }
 
-header .text-muted {
-    color: #666 !important;
-    font-size: 14px;
+.section-title i {
+    color: var(--primary);
+    font-size: 1.1rem;
 }
 
-.form-group label {
+/* 输入框样式 */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.9rem;
     font-weight: 500;
-    color: #444;
-    margin-bottom: 8px;
+    color: var(--text-main);
 }
 
-.form-control {
-    border-radius: 8px;
-    border: 2px solid #e0e0e0;
-    padding: 10px 15px;
-    transition: all 0.3s;
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+.input-wrapper input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    padding-right: 3rem; /* 为单位留空间 */
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    font-family: inherit;
 }
 
-.btn-group-toggle .btn {
-    border-radius: 8px;
-    margin: 0 5px;
-    transition: all 0.3s;
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-.btn-group-toggle .btn:first-child {
-    margin-left: 0;
+.unit {
+    position: absolute;
+    right: 1rem;
+    color: var(--text-sub);
+    font-size: 0.875rem;
+    font-weight: 500;
+    pointer-events: none;
 }
 
-.btn-group-toggle .btn:last-child {
-    margin-right: 0;
+/* 这里的 label 只是文本标签，不是 <label> */
+.control-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #1e3a8a; /* 深蓝 */
 }
 
-.btn-success {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    border: none !important;
-    border-radius: 10px !important;
-    padding: 12px 30px !important;
-    font-weight: 600 !important;
-    transition: all 0.3s !important;
-    color: white !important;
+.mt-4 { margin-top: 1.5rem; }
+
+/* Radio Cards (核心交互改动) */
+.radio-cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
 
-.btn-success:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4) !important;
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+.radio-cards-container.three-cols {
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.result-box {
-    padding: 20px !important;
-    border-radius: 10px !important;
-    background: #f8f9fa !important;
-    margin: 10px 0 !important;
+.radio-card {
+    position: relative;
+    cursor: pointer;
 }
 
-.result-box h5 {
-    color: #666 !important;
-    font-size: 16px !important;
-    margin-bottom: 10px !important;
+.radio-card input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.result-box .display-4 {
-    font-weight: 700 !important;
-    margin: 0 !important;
+.card-content {
+    background: white;
+    border: 2px solid rgba(255,255,255,0.8); /* 配合背景色 */
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.card {
-    border: none !important;
-    border-radius: 15px !important;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
-    margin-top: 20px !important;
+.card-content i {
+    font-size: 1.5rem;
+    color: var(--text-sub);
 }
 
-.card-header {
-    border-radius: 15px 15px 0 0 !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+.card-content span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-sub);
 }
 
-.card-header h4 {
-    color: white !important;
+.grade-number {
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    color: var(--text-sub) !important;
 }
 
+/* Radio 选中状态 */
+.radio-card input:checked + .card-content {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
+}
+
+.radio-card input:checked + .card-content i,
+.radio-card input:checked + .card-content span,
+.radio-card input:checked + .card-content .grade-number {
+    color: var(--primary) !important;
+}
+
+/* 提交按钮 */
+.form-actions {
+    margin-top: 2rem;
+    padding: 0 2.5rem 2rem 2.5rem; /* 在 full-width 区域内 */
+    background: var(--primary-light); /* 延续背景 */
+    border-radius: 0 0 24px 24px;
+    text-align: center;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    padding: 1.25rem;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.5);
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* 结果弹窗 (Modal 风格) */
+.results-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.results-modal {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.result-icon-badge {
+    width: 64px;
+    height: 64px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 1rem auto;
+}
+
+.results-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.results-body {
+    display: grid;
+    gap: 1rem;
+}
+
+.metric-card {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.metric-card.primary {
+    background: linear-gradient(135deg, var(--primary-light) 0%, #DBEAFE 100%);
+    border: 1px solid #BFDBFE;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-sub);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.metric-card.primary .metric-value {
+    color: var(--primary-dark);
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-section.full-width {
+        grid-column: span 1;
+        margin: 0 -1.5rem -1rem -1.5rem;
+        padding: 1.5rem;
+    }
+
+    .main-card {
+        padding: 1.5rem;
+    }
+    
+    .form-actions {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+}

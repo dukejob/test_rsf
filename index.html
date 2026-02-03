@@ -3,127 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>乳腺癌复发预测 - 随机生存森林模型</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>RSF 乳腺癌复发预测系统</title>
+    <!-- Google Fonts: Plus Jakarta Sans (更现代的无衬线字体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons (比 FontAwesome 更精致的线性图标库) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header class="my-4">
-            <h2 class="text-center">乳腺癌复发预测模型</h2>
-            <p class="text-center text-muted">基于随机生存森林算法 | 仅供医疗专业人员使用</p>
-            <p class="text-center"><small>模型C-index: 0.730 | 数据来源: GBSG2数据集</small></p>
+    
+    <div class="app-container">
+        <!-- 左侧/顶部 品牌区 -->
+        <header class="brand-header">
+            <div class="logo-badge">
+                <i class="ph-fill ph-dna"></i>
+            </div>
+            <div>
+                <h1>RSF Predictor</h1>
+                <p>基于随机生存森林的临床辅助决策系统</p>
+            </div>
         </header>
 
-        <form id="predictionForm" class="my-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="age">患者年龄（岁）</label>
-                        <input type="number" class="form-control" id="age" name="age" required min="18" max="100">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="tsize">肿瘤大小（mm）</label>
-                        <input type="number" class="form-control" id="tsize" name="tsize" required min="1" step="0.1">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="pnodes">阳性淋巴结数量</label>
-                        <input type="number" class="form-control" id="pnodes" name="pnodes" required min="0">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="progrec">孕激素受体（fmol/l）</label>
-                        <input type="number" class="form-control" id="progrec" name="progrec" required min="0" step="0.1">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="estrec">雌激素受体（fmol/l）</label>
-                        <input type="number" class="form-control" id="estrec" name="estrec" required min="0" step="0.1">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>激素治疗</label>
-                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-                            <label class="btn btn-outline-primary active">
-                                <input type="radio" name="horTh" value="0" checked> 否
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="horTh" value="1"> 是
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>肿瘤分级</label>
-                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-                            <label class="btn btn-outline-info active">
-                                <input type="radio" name="tgrade" value="1" checked> I级
-                            </label>
-                            <label class="btn btn-outline-info">
-                                <input type="radio" name="tgrade" value="2"> II级
-                            </label>
-                            <label class="btn btn-outline-info">
-                                <input type="radio" name="tgrade" value="3"> III级
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg btn-block mt-4">计算复发风险</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div id="results" class="my-4" style="display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">预测结果</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-md-6">
-                            <div class="result-box">
-                                <h5>风险分数</h5>
-                                <p class="display-4" id="riskScore">-</p>
+        <!-- 主内容卡片 -->
+        <main class="main-card">
+            <form id="predictionForm">
+                <div class="form-grid">
+                    <!-- 第一部分：基本指标 -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="ph-duotone ph-user"></i> 患者指标</h3>
+                        
+                        <div class="input-group">
+                            <label for="age">年龄 (Age)</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="age" name="age" required min="18" max="100" placeholder="0">
+                                <span class="unit">岁</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="result-box">
-                                <h5>风险分层</h5>
-                                <p class="display-4" id="riskGroup">-</p>
+
+                        <div class="input-group">
+                            <label for="tsize">肿瘤大小 (Size)</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="tsize" name="tsize" required min="1" step="0.1" placeholder="0.0">
+                                <span class="unit">mm</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="pnodes">淋巴结 (Nodes)</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="pnodes" name="pnodes" required min="0" placeholder="0">
+                                <span class="unit">个</span>
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-info mt-3">
-                        <strong>说明：</strong>该模型基于686例乳腺癌患者数据训练，C-index为0.730。
-                        风险分数越高，复发风险越大。风险分层基于训练数据的四分位数划分。
+
+                    <!-- 第二部分：病理指标 -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="ph-duotone ph-flask"></i> 病理数据</h3>
+                        
+                        <div class="input-group">
+                            <label for="progrec">孕激素受体 (PR)</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="progrec" name="progrec" required min="0" step="0.1" placeholder="0.0">
+                                <span class="unit">fmol/l</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="estrec">雌激素受体 (ER)</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="estrec" name="estrec" required min="0" step="0.1" placeholder="0.0">
+                                <span class="unit">fmol/l</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- 第三部分：治疗与分级 (大卡片选择) -->
+                    <div class="form-section full-width">
+                        <h3 class="section-title"><i class="ph-duotone ph-clipboard-text"></i> 诊断详情</h3>
+                        
+                        <div class="control-label">激素治疗 (Hormonal Therapy)</div>
+                        <div class="radio-cards-container">
+                            <label class="radio-card">
+                                <input type="radio" name="horTh" value="0" checked>
+                                <div class="card-content">
+                                    <i class="ph-duotone ph-prohibit"></i>
+                                    <span>否 (No)</span>
+                                </div>
+                            </label>
+                            <label class="radio-card active-style">
+                                <input type="radio" name="horTh" value="1">
+                                <div class="card-content">
+                                    <i class="ph-duotone ph-check-circle"></i>
+                                    <span>是 (Yes)</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="control-label mt-4">肿瘤分级 (Tumor Grade)</div>
+                        <div class="radio-cards-container three-cols">
+                            <label class="radio-card">
+                                <input type="radio" name="tgrade" value="1" checked>
+                                <div class="card-content">
+                                    <span class="grade-number">I</span>
+                                    <span>低度恶性</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tgrade" value="2">
+                                <div class="card-content">
+                                    <span class="grade-number">II</span>
+                                    <span>中度恶性</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tgrade" value="3">
+                                <div class="card-content">
+                                    <span class="grade-number">III</span>
+                                    <span>高度恶性</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <span>开始预测分析</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <!-- 结果弹窗 (初始隐藏) -->
+        <div id="results" class="results-overlay" style="display: none;">
+            <div class="results-modal">
+                <button class="close-modal" onclick="$('#results').fadeOut()"><i class="ph-bold ph-x"></i></button>
+                
+                <div class="results-header">
+                    <div class="result-icon-badge">
+                        <i class="ph-duotone ph-chart-line-up"></i>
+                    </div>
+                    <h2>预测分析报告</h2>
+                    <p>Analysis Report</p>
+                </div>
+
+                <div class="results-body">
+                    <div class="metric-card primary">
+                        <span class="metric-label">风险分数 (Risk Score)</span>
+                        <div class="metric-value" id="riskScore">-</div>
+                    </div>
+                    
+                    <div class="metric-card secondary">
+                        <span class="metric-label">风险分层 (Risk Group)</span>
+                        <div class="metric-value" id="riskGroup">-</div>
+                    </div>
+                </div>
+                
+                <div class="results-footer">
+                    <p><i class="ph-fill ph-info"></i> 结果仅供参考，请结合临床医生建议。</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 保持原有 JS 引用 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/rsf-predictor.js"></script>
     <script src="js/main.js"></script>
 </body>
