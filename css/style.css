@@ -1,18 +1,22 @@
 /* 乳腺癌复发预测模型 - 样式文件 */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+    padding: 20px 0 !important;
+    margin: 0 !important;
 }
 
 .container {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    max-width: 900px;
+    background: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+    padding: 30px !important;
+    max-width: 900px !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
 }
 
 header h2 {
@@ -59,44 +63,52 @@ header .text-muted {
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    border-radius: 10px;
-    padding: 12px 30px;
-    font-weight: 600;
-    transition: all 0.3s;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    color: white !important;
 }
 
 .btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4) !important;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
 }
 
 .result-box {
-    padding: 20px;
-    border-radius: 10px;
-    background: #f8f9fa;
-    margin: 10px 0;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    background: #f8f9fa !important;
+    margin: 10px 0 !important;
 }
 
 .result-box h5 {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 10px;
+    color: #666 !important;
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
 }
 
 .result-box .display-4 {
-    font-weight: 700;
-    margin: 0;
+    font-weight: 700 !important;
+    margin: 0 !important;
 }
 
 .card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: none !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+    margin-top: 20px !important;
 }
 
 .card-header {
     border-radius: 15px 15px 0 0 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.card-header h4 {
+    color: white !important;
 }
 
