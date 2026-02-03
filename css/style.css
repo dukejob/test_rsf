@@ -1,0 +1,102 @@
+/* 乳腺癌复发预测模型 - 样式文件 */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 900px;
+}
+
+header h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+header .text-muted {
+    color: #666 !important;
+    font-size: 14px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    padding: 10px 15px;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.btn-group-toggle .btn {
+    border-radius: 8px;
+    margin: 0 5px;
+    transition: all 0.3s;
+}
+
+.btn-group-toggle .btn:first-child {
+    margin-left: 0;
+}
+
+.btn-group-toggle .btn:last-child {
+    margin-right: 0;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.result-box {
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    margin: 10px 0;
+}
+
+.result-box h5 {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.result-box .display-4 {
+    font-weight: 700;
+    margin: 0;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
